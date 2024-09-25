@@ -12,7 +12,7 @@ setup(
     license='MIT',
     packages=['fletFlow'],
     install_requires=[
-        "pyzmq=>26.2.0"
+        "pyzmq==26.2.0"
     ],
     python_requires='>=3.9',
     zip_safe=False
