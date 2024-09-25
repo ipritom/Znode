@@ -3,13 +3,20 @@ import time
 import datetime
 
 class ZNode:
-    def __init__(self, host:str="127.0.0.1", port:int=5353, node_type:str="PUB",default_topic:str=None) -> None:
+    def __init__(self, 
+                 host:str="127.0.0.1", 
+                 port:int=5353, 
+                 node_type:str="PUB",
+                 default_topic:str=None,
+                 blocking=False,
+                 verbose=False) -> None:
         
         self.host = host 
         self.port = port
         self.defaul_topic = default_topic
         self.connection_point = f"tcp://{self.host}:{self.port}"
-
+        self.blocking = blocking
+        self.verbose = verbose
         # node configuration here
         self.context = zmq.Context()
         
@@ -31,7 +38,10 @@ class ZNode:
         """Connects to a 0MQ socket as a publisher"""
         self.socket.bind(self.connection_point)
         
-
+    def __debug(self, e):
+        if self.verbose:
+            print(f"{datetime.datetime.now()} | {e}")
+            
     def publish(self, topic:str=None, msg:str=""):
         # need to check the type
         if topic is None:
@@ -40,12 +50,24 @@ class ZNode:
         self.socket.send_multipart([topic.encode("utf-8"), msg.encode("utf-8")])
 
     def receive(self, topic:str=None):
+        packet = [None, None]
         if topic is None:
             topic = self.defaul_topic
         
-        message = self.socket.recv_multipart()
-        # need to check the type 
-        return message
+
+        # handling blocking rx
+        if self.blocking:
+            packet = self.socket.recv_multipart()
+            return packet, True
+        # handling non-blocking rx
+        else:
+            try:
+                packet = self.socket.recv_multipart(flags=zmq.NOBLOCK)
+                return packet, True
+            except Exception as e:
+                self.__debug(e)
+                return packet, False
+    
     
     def subscribe(self, topic:str=None):
         if topic is None:

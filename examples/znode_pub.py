@@ -1,10 +1,11 @@
 from znode import ZNode
 import time
 
-server  = ZNode(node_type="PUB")
+# create a publisher node
+publisher  = ZNode(node_type="PUB")
 
 while True:
-    server.publish("msg/comp", "HELLL NO")
-    server.publish("msg/inv", "HELLL YES")
-    time.sleep(1)
-    print(time.time())
+    publisher.publish(topic="msg/mango", msg=f"{str(time.time())[-1]}")
+    publisher.publish(topic="msg/apple", msg=f"")
+    # time.sleep(1)
+  

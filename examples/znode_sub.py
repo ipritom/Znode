@@ -1,10 +1,15 @@
 from znode import ZNode
+import time
+# create a client node and connects to a publisher server
+client  = ZNode(node_type="SUB",verbose=True)
 
+# subscribe to a topic or subtopic
+client.subscribe("msg/mango")
 
-client  = ZNode(node_type="SUB")
-client.subscribe("msg/inv")
-# client.subscribe("inv")
-
+# receive message from the subscribed topics
 while True:
-    topic, msg =  client.receive("msg")
-    print(msg)
+    packet, success =  client.receive("msg")
+    topic, msg = packet
+    if success:
+        print(f"topic: {topic} | message : {msg}", success)
+    
