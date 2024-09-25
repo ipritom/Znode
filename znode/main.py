@@ -2,7 +2,7 @@ import zmq
 import time
 import datetime
 
-class ZNode:
+class Node:
     def __init__(self, 
                  host:str="127.0.0.1", 
                  port:int=5353, 
@@ -49,11 +49,8 @@ class ZNode:
         
         self.socket.send_multipart([topic.encode("utf-8"), msg.encode("utf-8")])
 
-    def receive(self, topic:str=None):
+    def receive(self):
         packet = [None, None]
-        if topic is None:
-            topic = self.defaul_topic
-        
 
         # handling blocking rx
         if self.blocking:
