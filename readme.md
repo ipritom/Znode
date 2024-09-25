@@ -1,7 +1,11 @@
 # Znode 
 Znode, or Zero Node, is a messaging module built on the ØMQ framework. It facilitates communication between scripts within your programs. Very lightweight and lightning fast Pub/Sub tools.
 
-
+# How to Install
+You can install the module with pip in the following way. 
+```
+pip install git+https://github.com/wpritom/Znode 
+```
 # How to Use
 Import Znode module
 ```py
@@ -33,7 +37,7 @@ Following example show how to receive message publised by the publisher.
 ```py
 packet, success =  client.receive()
 ```
-`packet` contains a list of topic and a message. You can unpakc it in following way. 
+`packet` contains a list of topic and a message. You can unpack it in following way. 
 
 ```
 topic, msg = packet
