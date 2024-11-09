@@ -10,7 +10,7 @@ setup(
     author='Pritom Mojumder',
     author_email='pritom.blue2@gmail.com',
     license='MIT',
-    packages=['Znode'],
+    packages=['znode'],
     install_requires=[
         "pyzmq==26.2.0"
     ],
