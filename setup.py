@@ -14,6 +14,6 @@ setup(
     install_requires=[
         "pyzmq==26.2.0"
     ],
-    python_requires='>=3.9',
+    python_requires='>=3.8',
     zip_safe=False
 )
