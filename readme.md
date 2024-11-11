@@ -4,7 +4,7 @@ Znode, or Zero Node, is a messaging module built on the ØMQ framework. It facil
 # How to Install
 You can install the module with pip in the following way. 
 ```
-pip install git+https://github.com/wpritom/Znode 
+pip install git+https://github.com/ipritom/Znode 
 ```
 # How to Use
 Import Znode module
