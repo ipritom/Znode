@@ -9,7 +9,7 @@ pip install git+https://github.com/ipritom/Znode
 # How to Use
 Import Znode module
 ```py
-from Znode import Node
+from znode import Node
 ```
 ## Create a Publisher Node
 

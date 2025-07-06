@@ -1,4 +1,4 @@
-from Znode import Node
+from znode import Node
 import time
 # create a client node and connects to a publisher server
 client  = Node(node_type="SUB", verbose=True)
