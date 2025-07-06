@@ -1,4 +1,4 @@
-from znode import Node
+from Znode import Node
 import time
 
 # create a publisher node

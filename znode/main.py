@@ -26,6 +26,7 @@ class Node:
         elif node_type=="SUB":
             self.socket = self.context.socket(zmq.SUB)
             self.__connect()
+            self.subscribe(self.defaul_topic)
         else:
             raise ValueError("node_type can be PUB or SUB")
         
