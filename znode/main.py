@@ -50,7 +50,10 @@ class Node:
         if topic is None:
             topic = self.defaul_topic
         
-        self.socket.send_multipart([topic.encode("utf-8"), msg.encode("utf-8")])
+        if isinstance(msg, bytes):
+            self.socket.send_multipart([topic.encode("utf-8"), msg])
+        else:
+            self.socket.send_multipart([topic.encode("utf-8"), msg.encode("utf-8")])
 
     def receive(self):
         packet = [None, None]
