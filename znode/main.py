@@ -19,6 +19,7 @@ class Node:
         self.verbose = verbose
         # node configuration here
         self.context = zmq.Context()
+        self.node_type = node_type.upper()
         
         if node_type=="PUB":
             self.socket = self.context.socket(zmq.PUB)
@@ -71,6 +72,26 @@ class Node:
                 self.__debug(e)
                 return packet, False
     
+
+    def get_stream(self):
+        """Get a stream of messages from the socket.
+            This method will empty the socket and return all messages
+            received until the socket is empty.
+        """
+        if self.node_type != "SUB":
+            raise Warning("get_stream is only available for SUB nodes")
+        
+        if self.blocking:
+            raise AttributeError("get_stream is not available for blocking SUB nodes")
+        
+        stream = []
+        while True:
+            packet, success = self.receive()
+            if not success:
+                break
+            stream.append(packet)
+
+        return stream
     
     def subscribe(self, topic:str=None):
         if topic is None:

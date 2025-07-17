@@ -1,6 +1,6 @@
 from setuptools import setup
 
-VERSION = "0.1.4"
+VERSION = "0.1.5"
 
 setup(
     name="znode",
@@ -12,7 +12,7 @@ setup(
     license='MIT',
     packages=['znode'],
     install_requires=[
-        "pyzmq==26.2.0"
+        "pyzmq==27.0.0"
     ],
     python_requires='>=3.8',
     zip_safe=False
